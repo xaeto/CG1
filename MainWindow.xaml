@@ -8,7 +8,7 @@
         Title="MainWindow" Height="500" Width="800"
         WindowState="Maximized">
     <Grid>
-        <Image Name="image" HorizontalAlignment="Left" Height="276" Margin="21,39,0,0" VerticalAlignment="Top" Width="334" Loaded="Image_OnLoaded"/>
+        <Image Name="image" HorizontalAlignment="Left" Height="276" Margin="21,39,0,0" VerticalAlignment="Top" Width="276" Loaded="Image_OnLoaded"/>
         <Button Content="Draw Triangle" HorizontalAlignment="Left" Margin="656,39,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="Button_Click"/>
 
         <Slider Name="redSlider" HorizontalAlignment="Left" Margin="644,116,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Value="255" ValueChanged="RedSlider_OnValueChanged"/>

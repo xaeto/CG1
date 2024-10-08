@@ -29,21 +29,6 @@ namespace WpfApp1
         {
         }
 
-        private void drawTriangle(byte[] pixels, int width, int height)
-        {
-            for (int i = 0; i < width * height; ++i)
-            {
-                int r = i * 3;
-                int g = r + 1;
-                int b = r + 2;
-
-                pixels[r] = 0;
-                pixels[g] = 0;
-                pixels[b] = 0xff;
-                Console.WriteLine($"{r} {g} {b}");
-            }
-        }
-
         private void Image_OnLoaded(object sender, RoutedEventArgs e)
         {
             int width = 500, height = 500;
@@ -70,29 +55,37 @@ namespace WpfApp1
             image.Source = bitmap;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void updateImageColors()
         {
             int width = 267, height = 267;
             byte[] pixels = new byte[width * height * 4];
+            int offset = 0;
 
             for (int y = 0; y < height; ++y)
             {
                 for (int x = 0; x < y + 1; ++x)
                 {
-                    int index = x * 4 + y;
-                    pixels[index + 0] = 100;
-                    pixels[index + 1] = 100;
-                    pixels[index + 2] = 100;
+                    int index = x * 4 + offset;
+                    pixels[index + 0] = (byte)blueSlider.Value;
+                    pixels[index + 1] = (byte)greenSlider.Value;
+                    pixels[index + 2] = (byte)redSlider.Value;
                     pixels[index + 3] = 255;
                 }
+
+                offset += width * 4;
             }
 
-            WriteableBitmap bitmap = new WriteableBitmap(width, height, 0, 0, PixelFormats.Bgr32, null);
+            WriteableBitmap bitmap = new(width, height, 0, 0, PixelFormats.Bgr32, null);
             bitmap.WritePixels(new Int32Rect(0, 0, width, height), pixels, bitmap.BackBufferStride, 0);
             image.Source = bitmap;
 
             // 0 0 0 0 | 0 0 0 0 | 0 0 0 0
             // B G R A
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            updateImageColors();
         }
 
         private void BlueValueImage_OnLoaded(object sender, RoutedEventArgs e)
@@ -142,6 +135,8 @@ namespace WpfApp1
 
             bitmap.WritePixels(new Int32Rect(0, 0, width, height), pixels, bitmap.BackBufferStride, 0);
             outputColor.Source = bitmap;
+
+            updateImageColors();
         }
 
         private void BlueSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
