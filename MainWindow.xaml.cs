@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,9 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        private byte[] pixel;
+        private int width, height, stride;
 
         private void OnStartup(StartupEventArgs e)
         {
@@ -78,9 +82,6 @@ namespace WpfApp1
             WriteableBitmap bitmap = new(width, height, 0, 0, PixelFormats.Bgr32, null);
             bitmap.WritePixels(new Int32Rect(0, 0, width, height), pixels, bitmap.BackBufferStride, 0);
             image.Source = bitmap;
-
-            // 0 0 0 0 | 0 0 0 0 | 0 0 0 0
-            // B G R A
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -130,13 +131,11 @@ namespace WpfApp1
                 pixels[index + 0] = blue;
                 pixels[index + 1] = green;
                 pixels[index + 2] = red;
-                pixels[index + 3] = 0; // alpha
+                pixels[index + 3] = 255; // alpha
             }
 
             bitmap.WritePixels(new Int32Rect(0, 0, width, height), pixels, bitmap.BackBufferStride, 0);
             outputColor.Source = bitmap;
-
-            updateImageColors();
         }
 
         private void BlueSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -218,6 +217,30 @@ namespace WpfApp1
             redValueImage.Source = bitmap;
 
             updateOutputColor();
+        }
+
+        private void LoadImageButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Uri imagePath = new Uri("./Campus.png", UriKind.Relative);
+            BitmapImage img = new BitmapImage(imagePath);
+            WriteableBitmap bitmap = new WriteableBitmap(img);
+
+            int width = bitmap.PixelWidth, height = bitmap.PixelHeight;
+            int stride = bitmap.BackBufferStride;
+
+            byte[] pixels = new byte[width * height * 4];
+            bitmap.CopyPixels(pixels, stride, 0);
+
+            for (int i = 0; i < width * height; ++i)
+            {
+                pixels[i * 4 + 0] = (byte)(1 - pixels[i * 4 + 0]);
+                pixels[i * 4 + 1] = (byte)(1 - pixels[i * 4 + 1]);
+                pixels[i * 4 + 2] = (byte)(1 - pixels[i * 4 + 2]);
+            }
+
+            bitmap.WritePixels(new Int32Rect(0, 0, width, height), pixels, stride, 0);
+
+            image.Source = bitmap;
         }
     }
 }

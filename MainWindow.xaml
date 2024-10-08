@@ -24,5 +24,6 @@
         <Label Content="Blue" HorizontalAlignment="Left" Margin="601,169,0,0" VerticalAlignment="Top"/>
 
         <Image Name="outputColor" HorizontalAlignment="Left" Height="18" Margin="601,202,0,0" VerticalAlignment="Top" Width="169" Loaded="BlueValueImage_OnLoaded" />
+        <Button Name="loadImageButton" Content="Load Image" HorizontalAlignment="Left" Margin="673,409,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="LoadImageButton_OnClick"/>
     </Grid>
 </Window>
