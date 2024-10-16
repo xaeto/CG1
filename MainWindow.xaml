@@ -8,10 +8,10 @@
         Title="MainWindow" Height="500" Width="800"
         WindowState="Maximized">
     <Grid>
-        <Image Name="image" HorizontalAlignment="Left" Height="276" Margin="21,39,0,0" VerticalAlignment="Top" Width="276" Loaded="Image_OnLoaded"/>
-        <Button Content="Draw Triangle" HorizontalAlignment="Left" Margin="656,39,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="Button_Click"/>
+        <Image Name="triangle" HorizontalAlignment="Left" Height="214" Margin="10,10,0,0" VerticalAlignment="Top" Width="238" Loaded="drawTriangle"/>
+        <Button Content="Draw Triangle" HorizontalAlignment="Left" Margin="656,39,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="drawTriangle_onClick"/>
 
-        <Slider Name="redSlider" HorizontalAlignment="Left" Margin="644,116,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Value="255" ValueChanged="RedSlider_OnValueChanged"/>
+        <Slider Name="redSlider" HorizontalAlignment="Left" Margin="644,107,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Value="255" ValueChanged="RedSlider_OnValueChanged"/>
         <Slider Name="greenSlider" HorizontalAlignment="Left" Margin="644,144,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Value="255" ValueChanged="GreenSlider_OnValueChanged"/>
         <Slider Name="blueSlider" HorizontalAlignment="Left" Margin="644,173,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Value="255" ValueChanged="BlueSlider_OnValueChanged"/>
 
@@ -24,6 +24,9 @@
         <Label Content="Blue" HorizontalAlignment="Left" Margin="601,169,0,0" VerticalAlignment="Top"/>
 
         <Image Name="outputColor" HorizontalAlignment="Left" Height="18" Margin="601,202,0,0" VerticalAlignment="Top" Width="169" Loaded="BlueValueImage_OnLoaded" />
-        <Button Name="loadImageButton" Content="Load Image" HorizontalAlignment="Left" Margin="673,409,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="LoadImageButton_OnClick"/>
+        <Button Name="loadImageButton" Content="Load Image" HorizontalAlignment="Left" Margin="656,240,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="LoadImageButton_OnClick"/>
+        <Image Name ="image" HorizontalAlignment="Left" Height="231" Margin="10,242,0,0" VerticalAlignment="Top" Width="239"/>
+        <Button Name="InvertColorButton" Content="Invert Image" HorizontalAlignment="Left" Margin="656,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.64,-0.707" Height="49" Width="96" Click="invert_onClick"/>
+        <Button Name="TurnGreyButton" Content="Turn Gray" HorizontalAlignment="Left" Margin="656,347,0,0" VerticalAlignment="Top" Height="46" Width="96"/>
     </Grid>
 </Window>

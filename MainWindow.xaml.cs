@@ -21,22 +21,11 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-
-        private byte[] pixel;
-        private int width, height, stride;
-
-        private void OnStartup(StartupEventArgs e)
-        {
-        }
-
-        private void Image_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            int width = 500, height = 500;
-            WriteableBitmap bitmap = new WriteableBitmap(width, height, 0, 0, PixelFormats.Rgb24, null);
+  
+    private void drawTriangle(object sender, RoutedEventArgs e)
+    {
+        int width = 500, height = 500;
+        WriteableBitmap bitmap = new WriteableBitmap(width, height, 0, 0, PixelFormats.Rgb24, null);
 
             // width * height * 3, weil man bei Rgb24 8bit fuer jeden Farbkanal hat.
             byte[] pixels = new byte[width * height * 3];
@@ -50,13 +39,12 @@ namespace WpfApp1
                 pixels[r] = 0;
                 pixels[g] = 0;
                 pixels[b] = 0xff;
-                Console.WriteLine($"{r} {g} {b}");
             }
 
             bitmap.CopyPixels(pixels, bitmap.BackBufferStride, 0);
             ;
             var rect = new Int32Rect(0, 0, width, height);
-            image.Source = bitmap;
+            triangle.Source = bitmap;
         }
 
         private void updateImageColors()
@@ -81,10 +69,10 @@ namespace WpfApp1
 
             WriteableBitmap bitmap = new(width, height, 0, 0, PixelFormats.Bgr32, null);
             bitmap.WritePixels(new Int32Rect(0, 0, width, height), pixels, bitmap.BackBufferStride, 0);
-            image.Source = bitmap;
+            triangle.Source = bitmap;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void drawTriangle_onClick(object sender, RoutedEventArgs e)
         {
             updateImageColors();
         }
@@ -109,8 +97,6 @@ namespace WpfApp1
 
             bitmap.CopyPixels(pixels, bitmap.BackBufferStride, 0);
             blueValueImage.Source = bitmap;
-
-            Console.WriteLine($"{width} : {height}");
         }
 
         private void updateOutputColor()
@@ -220,6 +206,32 @@ namespace WpfApp1
         }
 
         private void LoadImageButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Uri imagePath = new Uri("./Campus.png", UriKind.Relative);
+            BitmapImage img = new BitmapImage(imagePath);
+            WriteableBitmap bitmap = new WriteableBitmap(img);
+
+            int width = bitmap.PixelWidth, height = bitmap.PixelHeight;
+            int stride = bitmap.BackBufferStride;
+
+            byte[] pixels = new byte[width * height * 4];
+            bitmap.CopyPixels(pixels, stride, 0);
+
+            for (int i = 0; i < width * height; ++i)
+            {
+                pixels[i * 4 + 0] = (byte)(pixels[i * 4 + 0]);
+                pixels[i * 4 + 1] = (byte)(pixels[i * 4 + 1]);
+                pixels[i * 4 + 2] = (byte)(pixels[i * 4 + 2]);
+            }
+
+            bitmap.WritePixels(new Int32Rect(0, 0, width, height), pixels, stride, 0);
+
+            image.Source = bitmap;
+        }
+
+
+
+        private void invert_onClick(object sender, RoutedEventArgs e)
         {
             Uri imagePath = new Uri("./Campus.png", UriKind.Relative);
             BitmapImage img = new BitmapImage(imagePath);
