@@ -254,5 +254,39 @@ namespace WpfApp1
 
             image.Source = bitmap;
         }
+
+        private void turnGray_onClick(object sender, RoutedEventArgs e)
+        {
+
+            Uri imagePath = new Uri("./Campus.png", UriKind.Relative);
+            BitmapImage img = new BitmapImage(imagePath);
+            WriteableBitmap bitmap = new WriteableBitmap(img);
+
+            int width = bitmap.PixelWidth, height = bitmap.PixelHeight;
+            int stride = bitmap.BackBufferStride;
+            Int32Rect rect = new Int32Rect(0, 0, width, height);
+
+            byte[] pixels = new byte[width * height * 4];
+            byte[] grayPixels = new byte[width * height]; //8 bit
+            bitmap.CopyPixels(pixels, stride, 0);
+
+            for (int i = 0; i < width * height; ++i)
+            {
+                int index = i * 4;
+                byte blue = pixels[index];       //blue
+                byte green = pixels[index + 1];  // green
+                byte red = pixels[index + 2];    // red
+
+                // formel
+                byte grayValue = (byte)(0.2126 * red + 0.7152 * green + 0.0722 * blue);
+                grayPixels[i] = grayValue;
+            }
+
+            WriteableBitmap grayBitmap = new WriteableBitmap(width, height, bitmap.DpiX, bitmap.DpiY, PixelFormats.Gray8, null);
+
+            grayBitmap.WritePixels(rect, grayPixels, width, 0);
+
+            image.Source = grayBitmap;
+        }
     }
 }

@@ -27,6 +27,6 @@
         <Button Name="loadImageButton" Content="Load Image" HorizontalAlignment="Left" Margin="656,240,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="LoadImageButton_OnClick"/>
         <Image Name ="image" HorizontalAlignment="Left" Height="231" Margin="10,242,0,0" VerticalAlignment="Top" Width="239"/>
         <Button Name="InvertColorButton" Content="Invert Image" HorizontalAlignment="Left" Margin="656,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.64,-0.707" Height="49" Width="96" Click="invert_onClick"/>
-        <Button Name="TurnGreyButton" Content="Turn Gray" HorizontalAlignment="Left" Margin="656,347,0,0" VerticalAlignment="Top" Height="46" Width="96"/>
+        <Button Name="TurnGreyButton" Content="Turn Gray" HorizontalAlignment="Left" Margin="656,347,0,0" VerticalAlignment="Top" Height="46" Width="96" Click="turnGray_onClick"/>
     </Grid>
 </Window>
