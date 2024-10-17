@@ -18,14 +18,33 @@
         <Image Name="greenValueImage" HorizontalAlignment="Left" Height="18" Margin="769,144,0,0" VerticalAlignment="Top" Width="18" Loaded="GreenValueImage_Loaded"/>
         <Image Name="blueValueImage" HorizontalAlignment="Left" Height="18" Margin="769,173,0,0" VerticalAlignment="Top" Width="18" Loaded="BlueValueImage_Loaded" />
 
-        <Label Content="Red" HorizontalAlignment="Left" Margin="601,112,0,0" VerticalAlignment="Top"/>
-        <Label Content="Green" HorizontalAlignment="Left" Margin="601,140,0,0" VerticalAlignment="Top"/>
-        <Label Content="Blue" HorizontalAlignment="Left" Margin="601,169,0,0" VerticalAlignment="Top"/>
+        <Label Content="Red:" HorizontalAlignment="Left" Margin="557,103,0,0" VerticalAlignment="Top"/>
+        <Label Content="Green:" HorizontalAlignment="Left" Margin="551,136,0,0" VerticalAlignment="Top"/>
+        <Label Content="Blue:" HorizontalAlignment="Left" Margin="560,167,0,0" VerticalAlignment="Top"/>
 
         <Image Name="outputColor" HorizontalAlignment="Left" Height="18" Margin="601,202,0,0" VerticalAlignment="Top" Width="169" />
         <Button Name="loadImageButton" Content="Load Image" HorizontalAlignment="Left" Margin="656,240,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="LoadImageButton_OnClick"/>
         <Image Name ="image" HorizontalAlignment="Left" Height="231" Margin="10,242,0,0" VerticalAlignment="Top" Width="239"/>
         <Button Name="InvertColorButton" Content="Invert Image" HorizontalAlignment="Left" Margin="656,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.64,-0.707" Height="49" Width="96" Click="invert_onClick"/>
         <Button Name="TurnGreyButton" Content="Turn Gray" HorizontalAlignment="Left" Margin="656,347,0,0" VerticalAlignment="Top" Height="46" Width="96" Click="turnGray_onClick"/>
+
+        <Label Name="redValue" Content="255" HorizontalAlignment="Left" Margin="601,103,0,0" VerticalAlignment="Top"/>
+        <Label Name="greenValue" Content="255" HorizontalAlignment="Left" Margin="601,140,0,0" VerticalAlignment="Top"/>
+        <Label Name="blueValue" Content="255" HorizontalAlignment="Left" Margin="601,171,0,0" VerticalAlignment="Top"/>
+        <CheckBox Name="redChannelEnabled" Content="Red" HorizontalAlignment="Left" Margin="551,242,0,0" VerticalAlignment="Top" Click="redCheckBoxClicked" IsChecked="True"/>
+        <CheckBox Name="greenChannelEnabled" Content="Green" HorizontalAlignment="Left" Margin="551,270,0,0" VerticalAlignment="Top" Click="greenCheckBoxClicked" IsChecked="True"/>
+        <CheckBox Name="blueChannelEnabled" Content="Blue" HorizontalAlignment="Left" Margin="551,300,0,0" VerticalAlignment="Top" Click="blueCheckBoxClicked" IsChecked="True" />
+        <Button x:Name="InvertedGrayScale" Content="Invert Gray Scale" HorizontalAlignment="Left" Margin="656,398,0,0" VerticalAlignment="Top" Height="46" Width="96" Click="invertGrayScaleImage"/>
+        <Slider Name="grayThreshold" Maximum="255" Value="128" HorizontalAlignment="Left" Margin="510,426,0,0" VerticalAlignment="Top" Width="120" ValueChanged="grayScaleThresholdValueChanged"/>
+        <Label Content="Threshold" HorizontalAlignment="Left" Margin="414,422,0,0" VerticalAlignment="Top"/>
+        <Label Name="thresholdValue" Content="128" HorizontalAlignment="Left" Margin="481,421,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="gammaCorrectionValue" Maximum="3.0" Value="0.5" HorizontalAlignment="Left" Margin="510,395,0,0" VerticalAlignment="Top" Width="120" ValueChanged="grayScaleGammaCorrection"/>
+        <Label Content="Gamma Correctection" HorizontalAlignment="Left" Margin="350,391,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="gammaCorrectionLabel" Content="0.5" HorizontalAlignment="Left" Margin="481,390,0,0" VerticalAlignment="Top"/>
+        <Button Content="Palette" HorizontalAlignment="Left" Margin="530,334,0,0" VerticalAlignment="Top" Height="46" Width="96" Click="Button_Click"/>
+        <Slider x:Name="paletteGammaGrayCorrectionSlider" Maximum="3.0" Value="0.5" HorizontalAlignment="Left" Margin="353,368,0,0" VerticalAlignment="Top" Width="120" ValueChanged="paletteGammaCorrectionSlider_ValueChanged"/>
+        <Slider x:Name="paletteGammaColorCorrectionSliderRed" Maximum="3.0" Value="0.5" HorizontalAlignment="Center" Margin="0,239,0,0" VerticalAlignment="Top" Width="120" ValueChanged="paletteGammaColorCorrectionSlider_ValueChanged"/>
+        <Slider x:Name="paletteGammaColorCorrectionSliderGreen" Maximum="3.0" Value="0.5" HorizontalAlignment="Center" Margin="0,269,0,0" VerticalAlignment="Top" Width="120" ValueChanged="paletteGammaColorCorrectionSlider_ValueChanged"/>
+        <Slider x:Name="paletteGammaColorCorrectionSliderBlue" Maximum="3.0" Value="0.5" HorizontalAlignment="Center" Margin="0,297,0,0" VerticalAlignment="Top" Width="120" ValueChanged="paletteGammaColorCorrectionSlider_ValueChanged"/>
     </Grid>
 </Window>
