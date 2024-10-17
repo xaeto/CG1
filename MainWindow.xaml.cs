@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,11 +21,11 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-  
-    private void drawTriangle(object sender, RoutedEventArgs e)
-    {
-        int width = 500, height = 500;
-        WriteableBitmap bitmap = new WriteableBitmap(width, height, 0, 0, PixelFormats.Rgb24, null);
+
+        private void drawTriangle(object sender, RoutedEventArgs e)
+        {
+            int width = 500, height = 500;
+            WriteableBitmap bitmap = new WriteableBitmap(width, height, 0, 0, PixelFormats.Rgb24, null);
 
             // width * height * 3, weil man bei Rgb24 8bit fuer jeden Farbkanal hat.
             byte[] pixels = new byte[width * height * 3];
@@ -42,8 +42,6 @@ namespace WpfApp1
             }
 
             bitmap.CopyPixels(pixels, bitmap.BackBufferStride, 0);
-            ;
-            var rect = new Int32Rect(0, 0, width, height);
             triangle.Source = bitmap;
         }
 
@@ -77,26 +75,74 @@ namespace WpfApp1
             updateImageColors();
         }
 
-        private void BlueValueImage_OnLoaded(object sender, RoutedEventArgs e)
+        private void BlueValueImage_Loaded(object sender, RoutedEventArgs e)
         {
             WriteableBitmap bitmap = new WriteableBitmap(18, 18, 0, 0, PixelFormats.Bgr32, null);
             (int width, int height) = (bitmap.PixelWidth, bitmap.PixelHeight);
 
-            byte [] pixels = new byte[width * height * 4];
+            byte[] pixels = new byte[width * height * 4];
 
             byte sliderValue = (byte)blueSlider.Value;
 
             for (int i = 0; i < width * height; ++i)
             {
-                int b = i * 3;
-                int g = b + 1;
-                int r = b + 2;
+                int index = i * 4;
 
-                pixels[b] = sliderValue;
+                pixels[index + 0] = sliderValue;
+                pixels[index + 1] = 0;
+                pixels[index + 2] = 0;
+                pixels[index + 3] = 0;
+
             }
 
             bitmap.CopyPixels(pixels, bitmap.BackBufferStride, 0);
             blueValueImage.Source = bitmap;
+        }
+
+        private void RedValueImage_Loaded(object sender, RoutedEventArgs e)
+        {
+            WriteableBitmap bitmap = new WriteableBitmap(18, 18, 0, 0, PixelFormats.Bgr32, null);
+            (int width, int height) = (bitmap.PixelWidth, bitmap.PixelHeight);
+
+            byte[] pixels = new byte[width * height * 4];
+
+            byte sliderValue = (byte)redSlider.Value;
+
+            for (int i = 0; i < width * height; ++i)
+            {
+                int index = i * 4;
+
+                pixels[index + 0] = 0;
+                pixels[index + 1] = 0;
+                pixels[index + 2] = sliderValue;
+                pixels[index + 3] = 0;
+            }
+
+            bitmap.CopyPixels(pixels, bitmap.BackBufferStride, 0);
+            redValueImage.Source = bitmap;
+        }
+
+        private void GreenValueImage_Loaded(object sender, RoutedEventArgs e)
+        {
+            WriteableBitmap bitmap = new WriteableBitmap(18, 18, 0, 0, PixelFormats.Bgr32, null);
+            (int width, int height) = (bitmap.PixelWidth, bitmap.PixelHeight);
+
+            byte[] pixels = new byte[width * height * 4];
+
+            byte sliderValue = (byte)greenSlider.Value;
+
+            for (int i = 0; i < width * height; ++i)
+            {
+                int index = i * 4;
+
+                pixels[index + 0] = 0;
+                pixels[index + 1] = sliderValue;
+                pixels[index + 2] = 0;
+                pixels[index + 3] = 0;
+            }
+
+            bitmap.CopyPixels(pixels, bitmap.BackBufferStride, 0);
+            greenValueImage.Source = bitmap;
         }
 
         private void updateOutputColor()
@@ -104,12 +150,12 @@ namespace WpfApp1
             byte red = (byte)redSlider.Value;
             byte blue = (byte)blueSlider.Value;
             byte green = (byte)greenSlider.Value;
-            
+
             WriteableBitmap bitmap = new WriteableBitmap(169, 18, 0, 0, PixelFormats.Bgr32, null);
             (int width, int height) = ((int)bitmap.Width, (int)bitmap.Height);
 
 
-            byte [] pixels = new byte[width * height * 4];
+            byte[] pixels = new byte[width * height * 4];
 
             for (int i = 0; i < width * height; ++i)
             {
@@ -132,7 +178,7 @@ namespace WpfApp1
             WriteableBitmap bitmap = new WriteableBitmap(18, 18, 0, 0, PixelFormats.Bgr32, null);
             (int width, int height) = ((int)bitmap.Width, (int)bitmap.Height);
 
-            byte [] pixels = new byte[width * height * 4];
+            byte[] pixels = new byte[width * height * 4];
 
             byte sliderValue = (byte)e.NewValue;
 
@@ -159,7 +205,7 @@ namespace WpfApp1
             WriteableBitmap bitmap = new WriteableBitmap(18, 18, 0, 0, PixelFormats.Bgr32, null);
             (int width, int height) = ((int)bitmap.Width, (int)bitmap.Height);
 
-            byte [] pixels = new byte[width * height * 4];
+            byte[] pixels = new byte[width * height * 4];
 
             byte sliderValue = (byte)e.NewValue;
 
@@ -186,7 +232,7 @@ namespace WpfApp1
             WriteableBitmap bitmap = new WriteableBitmap(18, 18, 0, 0, PixelFormats.Bgr32, null);
             (int width, int height) = ((int)bitmap.Width, (int)bitmap.Height);
 
-            byte [] pixels = new byte[width * height * 4];
+            byte[] pixels = new byte[width * height * 4];
 
             byte sliderValue = (byte)e.NewValue;
 
@@ -287,6 +333,11 @@ namespace WpfApp1
             grayBitmap.WritePixels(rect, grayPixels, width, 0);
 
             image.Source = grayBitmap;
+        }
+
+        private void greenValueImage_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
