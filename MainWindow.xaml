@@ -1,12 +1,11 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+<Window x:Class="WpfApp1.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800"
-        WindowState="Maximized">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
         <Image Name="triangle" HorizontalAlignment="Left" Height="214" Margin="10,10,0,0" VerticalAlignment="Top" Width="238" Loaded="drawTriangle"/>
         <Button Content="Draw Triangle" HorizontalAlignment="Left" Margin="656,39,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="drawTriangle_onClick"/>
@@ -15,15 +14,15 @@
         <Slider Name="greenSlider" HorizontalAlignment="Left" Margin="644,144,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Value="255" ValueChanged="GreenSlider_OnValueChanged"/>
         <Slider Name="blueSlider" HorizontalAlignment="Left" Margin="644,173,0,0" VerticalAlignment="Top" Width="120" Maximum="255" Value="255" ValueChanged="BlueSlider_OnValueChanged"/>
 
-        <Image Name="redValueImage" HorizontalAlignment="Left" Height="18" Margin="769,116,0,0" VerticalAlignment="Top" Width="18"/>
-        <Image Name="greenValueImage" HorizontalAlignment="Left" Height="18" Margin="769,144,0,0" VerticalAlignment="Top" Width="18"/>
-        <Image Name="blueValueImage" HorizontalAlignment="Left" Height="18" Margin="769,173,0,0" VerticalAlignment="Top" Width="18" Loaded="BlueValueImage_OnLoaded" />
+        <Image Name="redValueImage" HorizontalAlignment="Left" Height="18" Margin="769,116,0,0" VerticalAlignment="Top" Width="18" Loaded="RedValueImage_Loaded"/>
+        <Image Name="greenValueImage" HorizontalAlignment="Left" Height="18" Margin="769,144,0,0" VerticalAlignment="Top" Width="18" Loaded="GreenValueImage_Loaded"/>
+        <Image Name="blueValueImage" HorizontalAlignment="Left" Height="18" Margin="769,173,0,0" VerticalAlignment="Top" Width="18" Loaded="BlueValueImage_Loaded" />
 
         <Label Content="Red" HorizontalAlignment="Left" Margin="601,112,0,0" VerticalAlignment="Top"/>
         <Label Content="Green" HorizontalAlignment="Left" Margin="601,140,0,0" VerticalAlignment="Top"/>
         <Label Content="Blue" HorizontalAlignment="Left" Margin="601,169,0,0" VerticalAlignment="Top"/>
 
-        <Image Name="outputColor" HorizontalAlignment="Left" Height="18" Margin="601,202,0,0" VerticalAlignment="Top" Width="169" Loaded="BlueValueImage_OnLoaded" />
+        <Image Name="outputColor" HorizontalAlignment="Left" Height="18" Margin="601,202,0,0" VerticalAlignment="Top" Width="169" />
         <Button Name="loadImageButton" Content="Load Image" HorizontalAlignment="Left" Margin="656,240,0,0" VerticalAlignment="Top" Height="48" Width="96" Click="LoadImageButton_OnClick"/>
         <Image Name ="image" HorizontalAlignment="Left" Height="231" Margin="10,242,0,0" VerticalAlignment="Top" Width="239"/>
         <Button Name="InvertColorButton" Content="Invert Image" HorizontalAlignment="Left" Margin="656,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.64,-0.707" Height="49" Width="96" Click="invert_onClick"/>
